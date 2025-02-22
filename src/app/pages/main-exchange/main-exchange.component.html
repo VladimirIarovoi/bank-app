@@ -1,5 +1,9 @@
-<div class="load-bnr">
-  <button (click)="loadBNRData()" mat-button>Încarcă ratele de le
-    BNR
-  </button>
+<div class="page-container">
+  <div class="load-bnr">
+    <button (click)="loadBNRData()" mat-button>Încarcă ratele de le
+      BNR
+    </button>
+  </div>
+
+  <app-exchange-rate-table [tableItems]="tableItems()" (updateCurrency)="updateCurrency($event)"></app-exchange-rate-table>
 </div>

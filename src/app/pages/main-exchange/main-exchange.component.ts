@@ -1,23 +1,46 @@
-import {Component} from '@angular/core';
-import {MatButton} from '@angular/material/button';
+import {Component, OnInit, signal} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
 import {BnrApiService} from '../../services/bnr-api/bnr-api.service';
+import {IExchangeRates} from '../../interfaces';
+import {MatTableModule} from '@angular/material/table';
+import {ExchangeRateTableComponent} from '../../components/exchange-rate-table/exchange-rate-table.component';
+import {mergeMap, take} from 'rxjs';
 
 @Component({
   selector: 'app-main-exchange',
   standalone: true,
   imports: [
-    MatButton
+    MatButtonModule,
+    MatTableModule,
+    ExchangeRateTableComponent
   ],
   templateUrl: './main-exchange.component.html',
   styleUrl: './main-exchange.component.less'
 })
-export class MainExchangeComponent {
+export class MainExchangeComponent implements OnInit {
   constructor(private BNRApiService: BnrApiService) {
   }
 
+  public ngOnInit() {
+    this.loadData()
+  }
+
+  public tableItems = signal<IExchangeRates[]>([])
+
   public loadBNRData(): void {
-    this.BNRApiService.getExchangeRates().subscribe(response => {
-      console.log('response', response);
+    this.BNRApiService.getExchangeRatesBnr().pipe(take(1)).subscribe(response => {
+      this.tableItems.set(response);
     })
   }
+
+  public loadData(): void {
+    this.BNRApiService.getExchangeRates().pipe(take(1)).subscribe(response => this.tableItems.set(response));
+  }
+
+  public updateCurrency(currency: IExchangeRates): void {
+    this.BNRApiService.updateExchangeRate(currency.currency, currency.value).pipe(take(1)).subscribe(() => {
+      this.loadData()
+    })
+  }
+
 }

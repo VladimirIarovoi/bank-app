@@ -6,7 +6,7 @@ import {BnrApiService} from './services/bnr-api/bnr-api.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, StickyHeaderComponent],
+  imports: [RouterOutlet, StickyHeaderComponent ],
   providers: [BnrApiService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
