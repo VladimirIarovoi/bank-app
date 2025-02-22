@@ -26,7 +26,7 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row
-          *matRowDef="let row; columns: displayedColumns"></tr>
+          *matRowDef="let row; columns: displayedColumns" [appHighlightRow]="row?.wasChanged"></tr>
     </table>
   } @placeholder {
     <div class="no-data"><span>Ratele de schimb nu au fost încărcate. Apasă butonul 'Încarcă ratele de le BNR' pentru încărcarea ratelor.</span>

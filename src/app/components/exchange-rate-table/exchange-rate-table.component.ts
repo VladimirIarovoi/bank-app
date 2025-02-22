@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIcon} from '@angular/material/icon';
 import {MatDialog} from '@angular/material/dialog';
 import {EditExchangeRateComponent} from '../edit-exchange-rate/edit-exchange-rate.component';
+import {HighlightRowDirective} from '../../directives/highlight-row.directive';
 
 @Component({
   selector: 'app-exchange-rate-table',
@@ -18,6 +19,7 @@ import {EditExchangeRateComponent} from '../edit-exchange-rate/edit-exchange-rat
     FormsModule,
     ReactiveFormsModule,
     MatIcon,
+    HighlightRowDirective,
   ],
   templateUrl: './exchange-rate-table.component.html',
   styleUrl: './exchange-rate-table.component.less'

@@ -27,14 +27,27 @@ export class MainExchangeComponent implements OnInit {
 
   public tableItems = signal<IExchangeRates[]>([])
 
+  private initialValues = new Map<string, number>()
+
   public loadBNRData(): void {
+
     this.BNRApiService.getExchangeRatesBnr().pipe(take(1)).subscribe(response => {
       this.tableItems.set(response);
+      this.initialValues = new Map(response.map(item => [item.currency, item.value]))
     })
   }
 
   public loadData(): void {
-    this.BNRApiService.getExchangeRates().pipe(take(1)).subscribe(response => this.tableItems.set(response));
+    this.BNRApiService.getExchangeRates().pipe(take(1)).subscribe(response => {
+      const values = response;
+      values.forEach(value => {
+        if (this.initialValues.get(value.currency) !== value.value) {
+          value.wasChanged = true;
+        }
+      })
+
+      this.tableItems.set(values)
+    });
   }
 
   public updateCurrency(currency: IExchangeRates): void {
