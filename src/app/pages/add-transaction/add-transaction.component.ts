@@ -26,8 +26,7 @@ import {ITransaction} from '../../interfaces/transaction.interface';
   styleUrl: './add-transaction.component.less'
 })
 export class AddTransactionComponent implements OnInit {
-  constructor(private BNRApiService: BnrApiService) {
-  }
+  constructor(private BNRApiService: BnrApiService) {}
 
   public transactionForm!: FormGroup<ITransactionForm>;
   public currencies: IExchangeRates[] = [];
