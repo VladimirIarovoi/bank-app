@@ -1,9 +1,7 @@
-<div class="page-container">
-  <div class="load-bnr">
+  <div class="header">
+    <h2>Rate de schimb</h2>
     <button (click)="loadBNRData()" mat-button>Încarcă ratele de le
       BNR
     </button>
   </div>
-
   <app-exchange-rate-table [tableItems]="tableItems()" (updateCurrency)="updateCurrency($event)"></app-exchange-rate-table>
-</div>

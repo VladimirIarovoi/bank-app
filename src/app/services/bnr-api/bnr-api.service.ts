@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environment';
 import {IExchangeRates} from '../../interfaces';
+import {ITransaction} from '../../interfaces/transaction.interface';
 
 @Injectable()
 export class BnrApiService {
@@ -21,11 +22,11 @@ export class BnrApiService {
     return this.http.post<any>(`${environment.API_URL}/update-exchange-rates`, body);
   }
 
-  addTransaction(transactionData: any): Observable<any> {
+  addTransaction(transactionData: ITransaction): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/add-transaction`, transactionData);
   }
 
-  getTransactionsList(): Observable<any> {
+  getTransactionsList(): Observable<ITransaction[]> {
     return this.http.get<any>(`${environment.API_URL}/transactions-list`);
   }
 }

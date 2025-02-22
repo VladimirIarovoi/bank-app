@@ -1,1 +1,70 @@
-<p>add-transaction works!</p>
+<h2>Add Transaction</h2>
+
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>ID</mat-label>
+    <input matInput formControlName="id" type="number">
+    @if (transactionForm.controls.id.invalid) {
+      <mat-error>ID is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Date</mat-label>
+    <input matInput formControlName="date" type="date">
+    @if (transactionForm.controls.date.errors?.['futureDate']) {
+      <mat-error>Date cannot be in the future</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Product Code</mat-label>
+    <input matInput formControlName="productCode">
+    @if (transactionForm.controls.productCode.invalid) {
+      <mat-error>Must be exactly 4 alphanumeric characters</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Quantity</mat-label>
+    <input matInput formControlName="quantity" type="number">
+    @if (transactionForm.controls.quantity.invalid) {
+      <mat-error>Quantity must be greater than 0</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Amount</mat-label>
+    <input matInput formControlName="amount" type="number">
+    @if (transactionForm.controls.amount.invalid) {
+      <mat-error>Amount must be greater than 0</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Currency</mat-label>
+    <mat-select formControlName="currency">
+      @for (currency of currencies; track currency) {
+        <mat-option [value]="currency">
+          {{ currency.currency }}
+        </mat-option>
+      }
+
+    </mat-select>
+    @if (transactionForm.controls.currency.invalid) {
+      <mat-error>Currency is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Fee</mat-label>
+    <input matInput formControlName="fee" type="number">
+    @if (transactionForm.controls.fee.invalid) {
+      <mat-error>Fee must be between 0 and 100</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="transactionForm.invalid">
+    Add Transaction
+  </button>
+</form>

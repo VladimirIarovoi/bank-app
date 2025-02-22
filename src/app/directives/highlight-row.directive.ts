@@ -11,7 +11,6 @@ export class HighlightRowDirective implements OnChanges {
 
   ngOnChanges(): void {
     if (this.appHighlightRow) {
-      console.log('ElementRef: ', this.el.nativeElement)
       this.renderer.setStyle(this.el.nativeElement, 'background-color', '#dfdfdf');
     } else {
       this.renderer.setStyle(this.el.nativeElement, 'background-color', '#fff');
